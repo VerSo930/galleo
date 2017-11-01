@@ -1,0 +1,69 @@
+<!--header image-->
+<div class="page-header page-header-small clear-filter" filter-color="orange">
+
+  <!--background-->
+  <div #galleryHeader class="page-header-image" data-parallax="true">
+  </div>
+  <!--background-->
+
+  <!--container-->
+  <div class="container">
+    <div class="content-center">
+      <h1 class="title text-center">{{ gallery.name }}<br></h1>
+      <h6>{{ gallery.createdAt | date }}</h6>
+      <h3 class="description text-center">{{ gallery.description}}</h3>
+      <div class="content">
+        <div class="social-description">
+          <h2>{{ gallery.photosCount }}</h2>
+          <p>Photos</p>
+        </div>
+        <div class="social-description">
+          <h2>{{ gallery.views }}</h2>
+          <p>Views</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--container-->
+
+</div>
+<!-- header image -->
+
+<!--content section-->
+<div class="section" style="z-index: 99">
+  <div class="container">
+
+    <div class="button-container" style="text-align: start; z-index: 999; margin-top: -95px">
+      <form>
+        <button class="btn btn-primary btn-round" type="button" data-toggle="modal" data-target="#addPhotoModal">
+          <i class="now-ui-icons ui-2_favourite-28"></i> Add photo
+        </button>
+       <button class="btn-change-cover" (click)="onChangeCoverClick()">{{ changeCover ? "Select photo...": "Change cover" }} </button>
+      </form>
+    </div>
+
+    <div class="section" id="galleryHeader">
+
+    </div>
+
+    <div class="alert alert-{{ notification.type }}" *ngIf="notification.visible">
+      <div class="container">
+        <div class="alert-icon">
+          <i class="now-ui-icons objects_support-17"></i>
+        </div>
+        <strong>{{ notification.title }}</strong>
+        {{ notification.message }}
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <app-photo-list (photoSelected)="onCoverSelected($event)" [changeCover]="changeCover" [gallery]="gallery" (onScroll)="onScroll($event)"></app-photo-list>
+
+
+</div>
+
+
+

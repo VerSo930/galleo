@@ -1,0 +1,82 @@
+<button id="modalAddPhoto" type="button" data-toggle="modal" data-target="#addPhotoModal" style="display: none;">
+</button>
+
+<div class="modal fade modal-mini modal-primary" id="addPhotoModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"
+     style="display: none;" aria-hidden="true">
+
+  <div class=" modal-dialog modal-add-photo" data-background-color="orange">
+
+    <form class="form" [formGroup]="addPhotoForm">
+      <div class="header text-center">
+        <h5 class="title title-up">Add photo</h5>
+      </div>
+
+      <div class="card-body">
+        <div class="input-group form-group-no-border">
+                                        <span class="input-group-addon">
+                                            <i class="now-ui-icons text_caps-small"></i>
+                                        </span>
+          <input type="text" class="form-control" placeholder="Name..." formControlName="name">
+        </div>
+        <div class="input-group form-group-no-border">
+          <textarea class="form-control" placeholder="Photo description..." rows="4"
+                    formControlName="description"></textarea>
+        </div>
+        <div class="row row-no-padding">
+
+          <div class="col-md-8">
+
+              <div class="col-sm-12"
+                   [ngClass]="[imageFile.files.length == 0? 'active': 'inactive']">
+                <input type="file" id="selectFile" #imageFile class="inputfile"
+                       (change)="imageChanged(imageFile.files[0]); " formControlName="image"/>
+                <label for="selectFile" class="btn btn-simple btn-sm">
+                  <i class="now-ui-icons ui-1_simple-add" style="font-size: 13px; display: inline-block"></i>
+                  Add photo
+                </label>
+              </div>
+              <div class="col-sm-12 text-center"
+                   [ngClass]="[imageFile.files[0] != undefined? 'active': 'inactive']">
+                <img #imagePreview alt="Raised Image" class="rounded img-raised"
+                     (click)="onImageClear()">
+              </div>
+
+          </div>
+          <div class="col-md-4 text-center" style="margin: auto">
+            <div class="checkbox">
+              <input id="isPrivate" type="checkbox" checked="" formControlName="isPrivate">
+              <label for="isPrivate">
+                Private photo?
+              </label>
+            </div>
+            <div class="btn-clear-image" *ngIf="imageFile.files[0] != undefined">
+              <button class="btn btn-primary btn-simple btn-sm" (click)="onImageClear()" type="button">Clear Photo</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="progress-container progress-success"
+               [ngClass]="[modal.notification.visible? 'active': 'inactive']">
+            <span class="progress-badge font-weight-bold">{{modal.notification.message}}</span>
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                   aria-valuemax="100" [ngStyle]="{width: modal.notification.progress + '%'}">
+                <span class="progress-value">{{modal.notification.progress}}%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="footer text-center">
+
+          <button type="button" class="btn btn-neutral btn-lg"
+                  (click)="onSubmit()"
+                  [disabled]="modal.loading">Add photo</button>
+          <button id="dimissModal" type="button" class="btn btn-link btn-neutral" data-dismiss="modal" (click)="addPhotoForm.reset()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

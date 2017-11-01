@@ -1,0 +1,49 @@
+<div class="container">
+
+  <div class="row">
+    <ng-container *ngFor="let gallery of galleryList; let i = index">
+
+      <div class="col-md-6" style="padding: 0">
+        <div class="gallery">
+          <div class="cover" style="background-image: url('../assets/img/bg5.jpg')">
+            <label>
+              <i class="now-ui-icons shopping_tag-content" style="font-size: 20px; padding: 7px"></i>
+              {{gallery.name}}
+            </label>
+            <button (click)="onViewDetails(gallery)" class="btn btn-primary btn-round download btn-sm"
+                    type="button">
+              <i class="now-ui-icons media-1_album"></i> View Gallery
+            </button>
+
+          </div>
+          <div class="info">
+            <div class="content">
+
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="left" valign="top" class="pad-right">
+                    <p> {{gallery.description | truncate: 250: '...' }} </p>
+                  </td>
+                  <td width="20" rowspan="2" class="border-right">&nbsp;</td>
+                  <td width="140" rowspan="2" align="center" valign="middle">
+                    <h6>9.75</h6>
+                    <span class="stars">
+                        <em style="width: 91%"></em>
+                        </span>
+                    <small>(320 ratings)</small>
+                    <p class="stats"><i class="now-ui-icons business_chart-bar-32"></i> {{gallery.views}}
+                      <i class="now-ui-icons design_image" style="margin-left: 10px"></i> {{gallery.photosCount}}</p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </ng-container>
+  </div>
+
+</div>

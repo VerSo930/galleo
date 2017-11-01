@@ -1,0 +1,66 @@
+<!-- content -->
+<div class="container">
+
+  <div class="col-md-12 ml-auto mr-auto">
+
+    <div class="row collections" infiniteScroll
+         [infiniteScrollDistance]="1"
+         [infiniteScrollThrottle]="1200"
+         [infiniteScrollDisabled]="false"
+         [immediateCheck]="true"
+         (scrolled)="onScrollMethod()">
+
+      <div class="col-md-12" *ngIf="gallery.photos == null || gallery.photos.length == 0">
+        <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <h3 class="title">OOPS ... <br> no photos in this gallery</h3>
+            <h5 class="description">
+              After creation of a gallery you are able to add new photos as you want. For begin click on the button "Add Photo".
+               <br> So? Go on!
+            </h5>
+
+          </div>
+          <div  class="col-lg-6 col-md-12">
+            <div class="icons-container" style="text-align: center">
+              <img class="img-responsive" src="../assets/img/no-photos.png" style="max-width: 350px">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div @divState class="col-md-3" *ngFor="let photo of gallery.photos" style="overflow: hidden; padding: 3px">
+        <div class="hovereffect">
+          <img class="img-responsive"
+               src="http://vuta-alexandru.com:8080/Galleo/photo/resource/{{ photo.userId }}/{{photo.galleryId}}/{{ photo.id }}/small/{{ photo.url }}"
+               alt="" style="margin: 0px" (click)="photoSelected.next(photo)">
+          <span *ngIf="photo.isPrivate" class="private"><i class="now-ui-icons objects_key-25"></i></span>
+          <div class="overlay" *ngIf="!changeCover">
+            <h2>{{ photo.name }}</h2>
+            <a class="info"
+               href="http://vuta-alexandru.com:8080/Galleo/photo/resource/{{ photo.userId }}/{{photo.galleryId}}/{{ photo.id }}/high/{{ photo.url }}"
+               data-lightbox="image" data-title="{{photo.description}}">SHOW</a>
+            <a class="edit" (click)="onPhotoUpdate(photo)"><i class="now-ui-icons design-2_ruler-pencil"></i></a>
+
+            <a class="delete" data-toggle="modal" (click)="onPhotoDelete(photo)" data-target="#confirmationModal">
+              <i class="now-ui-icons ui-1_simple-remove"></i>
+            </a>
+
+            <!--<a  (click)="onPhotoDelete(photo)"><i class="now-ui-icons ui-1_simple-remove"></i></a>-->
+          </div>
+
+          <div class="overlay" *ngIf="changeCover" (click)="photoSelected.next(photo)">
+            <span class="select-cover-photo">Select as cover photo</span>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
+<app-photo-edit *ngIf="selectedPhoto != null" [photo]="selectedPhoto" (status)="onStatusMessage($event)"></app-photo-edit>
+<app-photo-add [galleryId]="gallery.id" (status)="onStatusMessage($event)"></app-photo-add>
+<app-confirmation-dialog [message]="confirmationMessage" (confirmation)="onDialogConfirmation($event)"></app-confirmation-dialog>

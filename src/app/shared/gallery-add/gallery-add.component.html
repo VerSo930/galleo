@@ -1,0 +1,58 @@
+
+<div class="modal fade modal-mini modal-primary" id="myModal1" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"
+     style="display: none;" aria-hidden="true">
+
+  <div class=" modal-dialog modal-add-gallery" data-background-color="orange">
+
+
+
+    <form class="form" [formGroup]="form">
+
+      <div class="header text-center">
+        <h4 class="title title-up">Add new gallery</h4>
+      </div>
+
+      <div class="card-body">
+        <div class="input-group form-group-no-border">
+                                        <span class="input-group-addon">
+                                            <i class="now-ui-icons users_circle-08"></i>
+                                        </span>
+          <input type="text" class="form-control" placeholder="Name..." formControlName="name">
+        </div>
+        <div class="input-group form-group-no-border">
+                                        <span class="input-group-addon">
+                                            <i class="now-ui-icons text_caps-small"></i>
+                                        </span>
+          <input type="text" placeholder="Description..." class="form-control" formControlName="description">
+        </div>
+
+        <div class="checkbox">
+          <input id="isPrivate" type="checkbox" checked="" formControlName="isPrivate">
+          <label for="isPrivate">
+            Is a private Gallery?
+          </label>
+        </div>
+
+        <div id="uploadImgError" class="alert alert-danger" *ngIf="modal.notification.visible">
+          <div class="container">
+            <div class="alert-icon">
+              <i class="now-ui-icons objects_support-17"></i>
+            </div>{{modal.notification.message}}
+
+          </div>
+        </div>
+        <div style="width: 100%; padding-top: 20px; text-align: center" *ngIf="modal.loading">
+
+          <i  class="fa fa-circle-o-notch fa-spin" style="font-size:40px; text-align: center"></i>
+        </div>
+      </div>
+
+      <div class="footer text-center">
+
+        <button type="button" class="btn btn-neutral btn-round btn-lg" (click)="onSubmit()" [disabled]="modal.loading">Add Gallery</button>
+        <button id="dimissModal" type="button" class="btn btn-link btn-neutral" data-dismiss="modal" >Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

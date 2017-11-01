@@ -1,0 +1,88 @@
+<div class="page-header" filter-color="">
+  <div class="page-header-image" style="background-image:url(../assets/img/bg1.jpg)"></div>
+  <div class="container">
+
+    <div class="col-md-4 content-center">
+      <div class="card card-login card-plain">
+        <form class="form" [formGroup]="siForm">
+          <div class="header text-center">
+            <h4 class="title title-up">Sign Up</h4>
+            <div class="social-line">
+              <a href="#pablo" class="btn btn-neutral btn-facebook btn-icon btn-round">
+                <i class="fa fa-facebook-square"></i>
+              </a>
+              <a href="#pablo" class="btn btn-neutral btn-twitter btn-icon btn-lg btn-round">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a href="#pablo" class="btn btn-neutral btn-google btn-icon btn-round">
+                <i class="fa fa-google-plus"></i>
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="input-group form-group-no-border">
+                                        <span class="input-group-addon" [ngClass]="{'invalid': name.invalid && name.touched}">
+                                           <i class="now-ui-icons business_badge"></i>
+
+                                        </span>
+              <input type="text" class="form-control" placeholder="First Name..."
+                     [ngClass]="{'invalid': name.invalid && name.touched}"
+              formControlName="name">
+            </div>
+            <div class="input-group form-group-no-border">
+                                        <span class="input-group-addon" [ngClass]="{'invalid': lastName.invalid && lastName.touched}">
+                                            <i class="now-ui-icons business_badge"></i>
+                                        </span>
+              <input type="text" placeholder="Last Name..." class="form-control"
+                     [ngClass]="{'invalid': lastName.invalid && lastName.touched}"
+              formControlName="lastName">
+            </div>
+
+            <div class="input-group form-group-no-border">
+                                        <span class="input-group-addon" [ngClass]="{'invalid': userName.invalid && userName.touched}">
+                                              <i class="now-ui-icons users_circle-08"></i>
+                                        </span>
+              <input type="text" placeholder="User Name..." class="form-control"
+                     [ngClass]="{'invalid': userName.invalid && userName.touched}"
+              formControlName="userName">
+            </div>
+
+            <div class="input-group form-group-no-border">
+                                        <span class="input-group-addon" [ngClass]="{'invalid': email.invalid && email.touched}">
+                                            <i class="now-ui-icons ui-1_email-85"></i>
+                                        </span>
+              <input type="text" placeholder="Email.." class="form-control"
+                     [ngClass]="{'invalid': email.invalid && email.touched}"
+              formControlName="email">
+            </div>
+            <div class="input-group form-group-no-border">
+                                        <span class="input-group-addon" [ngClass]="{'invalid': password.invalid && password.touched}">
+                                            <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                                        </span>
+              <input type="password" class="form-control" placeholder="Password..." formControlName="password"
+                     [ngClass]="{'invalid': password.invalid && password.touched}">
+            </div>
+            <div class="input-group form-group-no-border">
+                                        <span class="input-group-addon" [ngClass]="{'invalid': passwordConfirmation.invalid && passwordConfirmation.touched}">
+                                            <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                                        </span>
+              <input type="password" class="form-control" placeholder="Password confirmation..." formControlName="passwordConfirmation"
+                     [ngClass]="{'invalid': passwordConfirmation.invalid && passwordConfirmation.touched}">
+            </div>
+
+             <div class="checkbox" style="padding-top: 10px">
+              <input id="checkboxSignup" type="checkbox">
+                  <label for="checkboxSignup">
+                  I agree with all <a href=""> terms & conditions</a>
+                  </label>
+                </div>
+          </div>
+          <div class="footer text-center">
+            <button href="#pablo" class="btn btn-neutral btn-round btn-lg" (click)="onSubmit()" [disabled]="siForm.invalid">Get Started</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,64 @@
+.modal-add-photo {
+  max-width: 500px!important;
+  padding: 10px;
+}
+
+.btn-clear-image {
+  margin-bottom: 12px;
+  margin-top: 12px;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  /*  font-size: 1.20em;
+    font-weight: 700;
+    color: white;
+    padding: 10px;
+    background-color:transparent;
+    display: inline-block;
+    transition: all 0.4s ease;
+    opacity: 0.8;*/
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  /*  background-color: rgba(252, 255, 251, 0.22);
+    transition: all 0.4s ease;
+    opacity: 1;
+    border-radius: 4px;*/
+}
+.inputfile + label {
+  cursor: pointer; /* "hand" cursor */
+}
+
+textarea {
+  border-radius: 20px;
+}
+
+.inactive {
+  display: none;
+}
+.active {
+  display: block;
+}
+.progress-container.progress-success {
+  margin-top: 20px;
+}
+.progress-container.progress-success .progress {
+  background: rgba(255, 255, 255, 0.12);
+}
+.progress-container.progress-success .progress-bar {
+  background: #fff;
+}
+
+.progress-container.progress-success .progress-value, .progress-container.progress-success .progress-badge {
+  color: white;
+}

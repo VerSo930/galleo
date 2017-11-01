@@ -1,0 +1,82 @@
+<!--header -->
+<div class="page-header page-header-small" filter-color="orange">
+  <!--header image-->
+  <div class="page-header-image" data-parallax="true"
+       style="background-image: url('../assets/img/bg5.jpg'); transform: translate3d(0px, 0px, 0px);">
+  </div>
+  <!--header container-->
+  <div class="container">
+    <div class="content-center">
+      <div class="photo-container">
+        <img [src]="(user.avatar == null)? '../assets/img/default-avatar.png': '../assets/img/blurred-image-1.jpg'"
+             alt="">
+      </div>
+      <h3 class="title">{{ user.name }} {{ user.lastName }}</h3>
+      <p class="category">Photographer</p>
+      <div class="content">
+        <div class="social-description">
+          <h2>{{user.photosCount}}</h2>
+          <p>Photos</p>
+        </div>
+        <div class="social-description">
+          <h2>{{user.galleriesCount}}</h2>
+          <p>Galleries</p>
+        </div>
+        <div class="social-description">
+          <h2>48</h2>
+          <p>Bookmarks</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- section-->
+<div class="section" style="z-index: 99">
+  <div class="container">
+    <!-- buttons container-->
+      <div class="button-container" style="text-align: start; z-index: 999; margin-top: 95px">
+        <form>
+          <button class="btn btn-primary btn-round" type="button" data-toggle="modal" data-target="#myModal1">
+            <i class="now-ui-icons ui-2_favourite-28"></i> Add new Gallery
+          </button>
+        </form>
+      </div>
+
+    <!-- notification bar-->
+      <div class="alert alert-{{ notification.type }}" *ngIf="notification.visible">
+        <div class="container">
+          <div class="alert-icon">
+            <i class="now-ui-icons objects_support-17"></i>
+          </div>
+          <strong>{{ notification.title }}</strong>
+          {{ notification.message }}
+
+        </div>
+      </div>
+
+
+    <div class="col-md-12" *ngIf="galleryList == null || galleryList.length == 0">
+      <div class="row">
+        <div class="col-lg-6 col-md-12">
+          <h3 class="title">OOPS ... <br> you don't have galleries</h3>
+          <h5 class="description">
+            Feel free to create your galleries as you want. You can start adding galleries by click on button  <br> <b>"Add new gallery"</b>.
+            <br> So? Go on!
+          </h5>
+
+        </div>
+        <div  class="col-lg-6 col-md-12">
+          <div class="icons-container" style="text-align: center">
+            <img class="img-responsive" src="../assets/img/no-gallery.png" style="max-width: 350px">
+          </div>
+        </div>
+      </div>
+    </div>
+
+ <!-- Gallery list component-->
+  <app-gallery-list *ngIf="galleryList != null || galleryList.length > 0" [galleryList]="galleryList" (onScroll)="onScroll()"></app-gallery-list>
+
+  </div>
+</div>
+<!-- Gallery add modal -->
+<app-gallery-add (status)="onGalleryAdd($event)"></app-gallery-add>

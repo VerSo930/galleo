@@ -1,0 +1,152 @@
+.gallery {
+
+  width: auto;
+  height: auto;
+  background: #FFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, .5);
+  box-sizing: inherit;
+  margin: 15px;
+  padding-bottom: 0!important;
+
+}
+
+.gallery > .cover {
+  position: relative;
+  height: 260px;
+  background: transparent center no-repeat;
+  background-size: cover;
+  border-radius: 2px 2px 0 0;
+}
+
+.gallery > .cover > label {
+  position: absolute;
+  top: 22px;
+  height: 30px;
+  padding: 0 30px 0 50px;
+  line-height: 33px;
+  vertical-align: middle;
+  font-family: sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #FFF;
+  text-shadow: 0 1px 2px #000;
+  background: rgba(0, 0, 0, 0.17);
+}
+
+.gallery > .cover > label > i {
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+
+.gallery > .cover > label > i > svg {
+  margin: 8px;
+}
+
+.gallery > .cover > .download {
+  display: block;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+
+}
+
+
+
+
+.gallery > .info {
+  position: relative;
+  height: 134px;
+  overflow: hidden;
+  border-radius: 0 0 2px 2px;
+}
+
+.gallery > .info > .recipe {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 134px;
+  height: 134px;
+  background: #ff2200;
+  color: #FFF;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 0 0 0 2px;
+}
+
+.gallery > .info > .recipe:hover {
+  background: #9967B9
+}
+
+.gallery > .info > .recipe > i {
+  display: block;
+  margin: 38px 0 15px;
+}
+
+.gallery > .info > .content {
+
+  padding: 15px;
+  max-width: none;
+}
+
+.gallery > .info > .content > .stats{
+  font-size: 15px;
+}
+
+.gallery > .info > .content > .stats > .now-ui-icons {
+  font-size: 20px;
+}
+
+.gallery > .info > .content strong {
+  font-weight: normal;
+  color: #333
+}
+
+.gallery > .info > .content .pad-right {
+  padding-right: 20px;
+  font-size: 12px;
+}
+
+.gallery > .info > .content .border-right {
+  border-right: 1px solid #D9D9D9
+}
+
+.gallery > .info > .content .consumers img, .gallery > .info > .content .consumers span {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin: 0 2px 0 0;
+  line-height: 32px;
+  vertical-align: middle;
+  border-radius: 100%
+}
+
+.gallery > .info > .content .consumers span {
+  margin: 0
+}
+
+.gallery > .info > .content h1 {
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.gallery > .info > .content .stars, .gallery > .info > .content .stars > em {
+  display: block;
+  width: 99px;
+  height: 18px;
+  margin: 0 auto 7px;
+  text-align: left;
+  background: url(http://c.boylett.uk/generic/image_png_00004.png);
+}
+
+.gallery > .info > .content .stars > em {
+  width: 99px;
+  height: 18px;
+  margin: 0;
+  background: url(http://c.boylett.uk/generic/image_png_00004.png);
+  background-position: 0 -18px;
+}

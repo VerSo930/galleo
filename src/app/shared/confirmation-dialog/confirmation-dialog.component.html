@@ -1,0 +1,22 @@
+
+
+
+<div class="modal fade modal-mini modal-primary" id="confirmationModal" tabindex="-1"
+     role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <div class="modal-profile">
+          <i class="now-ui-icons users_circle-08"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p>{{message}}</p>
+      </div>
+      <div class="modal-footer">
+        <button id="dimissConfirmationDialog" type="button" class="btn btn-link btn-neutral" (click)="onButtonClick(false)" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-link btn-neutral"  (click)="onButtonClick(true)" >Yes I'm sure</button>
+      </div>
+    </div>
+  </div>
+</div>

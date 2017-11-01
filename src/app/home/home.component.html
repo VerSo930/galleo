@@ -1,0 +1,67 @@
+<div class="wrapper">
+<div class="page-header page-header-small">
+  <div class="page-header-image" data-parallax="true" style="background-image: url(&quot;../assets/img/header.jpg&quot;); transform: translate3d(0px, 0px, 0px);">
+  </div>
+  <div class="container">
+    <div class="row"  style="padding-top: 150px">
+      <div class="col-md-6">
+        <div class="content-center">
+          <h1 class="title">Welcome to Galleo</h1>
+          <div class="text-center">
+            <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+              <i class="fa fa-facebook-square"></i>
+            </a>
+            <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#pablo" class="btn btn-primary btn-icon btn-round">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="text-center" *ngIf="!session.isAuthenticated">
+          <h1 itemprop="name" class="product-name">Galleo</h1>
+          <h6 class="tagline">Create your account <br>and start creating galleries FREE!</h6>
+
+          <div class="tab-content" style="padding-top: 50px">
+            <button class="btn btn-new btn-simple btn-fill btn-wd btn-round btn-account" [routerLink]="['/', 'signup']">
+              Create Account
+            </button>
+            <button class="btn btn-new btn-fill btn-wd btn-round btn-simple btn-account" [routerLink]="['/', 'signin']">
+              I have an account
+            </button>
+
+          </div>
+        </div>
+
+        <div class="text-center" *ngIf="session.isAuthenticated">
+          <h1 itemprop="name" class="product-name">Welcome {{ session.user.name }}</h1>
+          <p>
+          <span class="text-info" style="font-size: 25px"> {{session.user.photosCount}} </span> Photos<br>
+          <span class="info"> <span class="text-info" style="font-size: 25px">{{ session.user.galleriesCount }} </span>  galleries</span>
+          </p>
+
+          <div class="tab-content" style="padding-top: 50px">
+            <button class="btn btn-new btn-simple btn-fill btn-wd btn-round btn-account"
+                    [routerLink]="['/', 'view-profile', session.user.id, 'detail']">
+              Go to my Profile
+            </button>
+            <button class="btn btn-new btn-fill btn-wd btn-round btn-simple btn-account"
+                    (click)="onLogout()">
+              Logout
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <router-outlet></router-outlet>
+
+</div>
+
