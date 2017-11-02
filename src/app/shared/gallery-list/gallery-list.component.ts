@@ -36,11 +36,11 @@ export class GalleryListComponent implements OnInit {
   }
 
   onGalleryUpdate() {
-
+    // TODO: Modal lunch for update gallery
   }
 
   onGalleryDelete() {
-
+// TODO: Modal lunch for confirmation of delete gallery
   }
 
 }

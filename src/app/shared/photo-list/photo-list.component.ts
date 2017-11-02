@@ -102,7 +102,7 @@ export class PhotoListComponent implements OnInit, OnChanges {
       console.log('change cover click: ' + this.changeCover);
     }
 
-    if (changes.gallery.currentValue != null) {
+    if (changes.gallery) {
       this.pagination.totalCount = this.gallery.photosCount;
     }
   }
