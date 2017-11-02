@@ -11,6 +11,7 @@ import { PhotoAddComponent } from './photo-add/photo-add.component';
 import {GalleryAddComponent} from './gallery-add/gallery-add.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import {EditPhotoComponent} from './photo-edit/photo-edit.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 

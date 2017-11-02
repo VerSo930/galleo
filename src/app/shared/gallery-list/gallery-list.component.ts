@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {GalleryModel} from '../model/gallery.model';
 import {Router} from '@angular/router';
+import {SessionModel} from '../model/session.model';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-gallery-list',
@@ -15,10 +17,14 @@ export class GalleryListComponent implements OnInit {
   @Output()
   onScroll: EventEmitter<null> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  session: SessionModel;
+
+  constructor(private router: Router,
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
-
+    this.session = this.authService.cachedSession;
   }
 
   onScrollMethod() {
@@ -27,6 +33,14 @@ export class GalleryListComponent implements OnInit {
 
   onViewDetails(gallery) {
     this.router.navigate(['./', 'view-profile', gallery.userId, 'gallery-detail', gallery.id]);
-}
+  }
+
+  onGalleryUpdate() {
+
+  }
+
+  onGalleryDelete() {
+
+  }
 
 }

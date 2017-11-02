@@ -33,12 +33,12 @@
 <div class="section" style="z-index: 99">
   <div class="container">
 
-    <div class="button-container" style="text-align: start; z-index: 999; margin-top: -95px">
+    <div   class="button-container" style="text-align: start; z-index: 999; min-height: 30px; margin-top: -95px">
       <form>
-        <button class="btn btn-primary btn-round" type="button" data-toggle="modal" data-target="#addPhotoModal">
+        <button *ngIf="session.isAuthenticated" class="btn btn-primary btn-round" type="button" data-toggle="modal" data-target="#addPhotoModal">
           <i class="now-ui-icons ui-2_favourite-28"></i> Add photo
         </button>
-       <button class="btn-change-cover" (click)="onChangeCoverClick()">{{ changeCover ? "Select photo...": "Change cover" }} </button>
+       <button *ngIf="session.isAuthenticated"  class="btn-change-cover" (click)="onChangeCoverClick()">{{ changeCover ? "Select photo...": "Change cover" }} </button>
       </form>
     </div>
 

@@ -5,6 +5,7 @@ import {UserModel} from '../../shared/model/user.model';
 import {Subscription} from 'rxjs/Subscription';
 import {AuthService} from '../../auth/auth.service';
 import {PaginationModel} from '../../shared/model/pagination.model';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-profile-detail',
@@ -29,7 +30,8 @@ export class ProfileDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private storageService: DataStorageService,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
 
@@ -37,28 +39,35 @@ export class ProfileDetailComponent implements OnInit {
     this.pagination = new PaginationModel(0, 12, 1);
 
     this.route.parent.params.subscribe((params) => {
-      this.user.id = params['id'];
+      this.user.id = params['userId'];
+      this.authService.getUserById(this.user.id).subscribe(
+        (user) => {
+          if (!isNullOrUndefined(user)) {
+            this.user = user;
+          }
+        }
+      );
+      console.log('userID: ' + this.user.id);
     });
 
-    this.sessionSub = this.authService.session.subscribe(
-      (userSession) => {
-        this.user = userSession.user;
+
+    /* this.sessionSub = this.authService.session.subscribe(
+       (userSession) => {
+         this.user = userSession.user;
+       }
+     );
+
+     this.user = this.authService.getSession().user;*/
+
+    this.gallerySub = this.storageService.galleryListChanged.subscribe(
+      galleryMap => {
+        this.galleryList = Array.from(galleryMap.values());
+      },
+      error => {
       }
     );
 
-    this.user = this.authService.getSession().user;
-
-    this.gallerySub = this.storageService.galleryListChanged.subscribe(
-        galleryMap => {
-          this.galleryList = Array.from(galleryMap.values());
-          },
-        error => {  }
-      );
-
-    this.storageService.getGalleryByUserId(
-      this.authService.getSession().user.id,
-      1,
-      15);
+    this.storageService.getGalleryByUserId(this.user.id, 1, 15);
 
     // this.elem.nativeElement.querySelector('#test').src = this.src;
 
@@ -68,7 +77,7 @@ export class ProfileDetailComponent implements OnInit {
     this.router.navigate(['gallery-detail', id], {relativeTo: this.route.parent});
   }
 
-  onGalleryAdd(event: {ok: boolean, message: string}) {
+  onGalleryAdd(event: { ok: boolean, message: string }) {
 
     if (event.ok) {
       this.showNotification('success', 'Success', event.message);

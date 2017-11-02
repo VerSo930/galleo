@@ -55,8 +55,6 @@ export class PhotoAddComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       });
     this.createForm();
-
-
   }
 
   ngAfterViewInit(): void {

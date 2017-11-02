@@ -96,7 +96,7 @@ export class DataStorageService {
       this.httpClient.get<GalleryModel>(AppSettings.API_ENDPOINT + 'gallery/' + id, {observe: 'response'}).subscribe(
         (response) => {
           this.galleryMap.set(response.body.id, response.body);
-          this.getGalleryPhotos(id);
+          this.getGalleryPhotos(id, new PaginationModel(0, 12, 1));
           this.galleryListChanged.next(this.galleryMap);
         },
         (error) => {
@@ -106,7 +106,7 @@ export class DataStorageService {
     } else {
       if (this.galleryMap.get(id).photos == null || this.galleryMap.get(id).photos.length === 0) {
         console.log(':: Gallery photos are null.');
-        this.getGalleryPhotos(id);
+        this.getGalleryPhotos(id, new PaginationModel(0, 12, 1));
       }
       this.galleryListChanged.next(this.galleryMap);
     }
@@ -228,9 +228,7 @@ export class DataStorageService {
             this.galleryMap.get(+updatedPhoto.galleryId).photos[index] = updatedPhoto;
           }
 
-
-
-          this.galleryListChanged.next(this.galleryMap);
+          // this.galleryListChanged.next(this.galleryMap);
 
           return true;
         } else {
@@ -243,19 +241,18 @@ export class DataStorageService {
       });
   }
 
-  getGalleryPhotos(galleryId: number): void {
+  getGalleryPhotos(galleryId: number, pagination: PaginationModel): void {
 
     console.log('Get gallery photos called');
     const headers = new HttpHeaders()
-      .set('X-Pagination-Page', '' + this.pagination.currentPage)
-      .set('X-Pagination-Limit', '' + this.pagination.limit);
+      .set('X-Pagination-Page', '' + pagination.currentPage)
+      .set('X-Pagination-Limit', '' + pagination.limit);
 
     this.httpClient.get<PhotoModel[]>(AppSettings.API_ENDPOINT + 'photo/gallery/' + galleryId,
       {observe: 'response', headers: headers}).subscribe(
       (response) => {
-        this.pagination.totalCount = +response.headers.get('X-Pagination-Count');
-        this.pagination.currentPage = +response.headers.get('X-Pagination-Page');
-        this.pagination.totalCount = +response.headers.get('X-Pagination-Count');
+        pagination.totalCount = +response.headers.get('X-Pagination-Count');
+        pagination.currentPage = +response.headers.get('X-Pagination-Page');
 
         if (this.galleryMap.has(galleryId)) {
           if (this.galleryMap.get(galleryId).photos == null) {

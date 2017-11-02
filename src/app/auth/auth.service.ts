@@ -10,6 +10,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AppSettings} from '../app.settings';
 import {Md5} from 'ts-md5/dist/md5';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 
 
 @Injectable()
@@ -50,6 +51,20 @@ export class AuthService {
         this.session.next(null);
       }
     );
+  }
+
+  getUserById(userId: number): Observable<UserModel> {
+    return this.http.get<UserModel>(AppSettings.API_ENDPOINT + 'user/' + userId, {observe: 'response'}).map(
+      (response) => {
+        console.dir(response);
+        return response.body;
+      },
+      (error) => {
+        console.log(error);
+        return null;
+      }
+    );
+
   }
 
   // logout method cleans all cookies and session object

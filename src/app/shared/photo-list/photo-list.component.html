@@ -27,10 +27,11 @@
           </div>
         </div>
       </div>
+      <ng-template>
+      <div  class="col-md-3" *ngFor="let photo of gallery.photos" style="overflow: hidden; padding: 3px;">
 
-      <div @divState class="col-md-3" *ngFor="let photo of gallery.photos" style="overflow: hidden; padding: 3px">
         <div class="hovereffect">
-          <img class="img-responsive"
+          <img [@photo]="photoState" class="img-responsive"
                src="http://vuta-alexandru.com:8080/Galleo/photo/resource/{{ photo.userId }}/{{photo.galleryId}}/{{ photo.id }}/small/{{ photo.url }}"
                alt="" style="margin: 0px" (click)="photoSelected.next(photo)">
           <span *ngIf="photo.isPrivate" class="private"><i class="now-ui-icons objects_key-25"></i></span>
@@ -39,13 +40,13 @@
             <a class="info"
                href="http://vuta-alexandru.com:8080/Galleo/photo/resource/{{ photo.userId }}/{{photo.galleryId}}/{{ photo.id }}/high/{{ photo.url }}"
                data-lightbox="image" data-title="{{photo.description}}">SHOW</a>
-            <a class="edit" (click)="onPhotoUpdate(photo)"><i class="now-ui-icons design-2_ruler-pencil"></i></a>
 
-            <a class="delete" data-toggle="modal" (click)="onPhotoDelete(photo)" data-target="#confirmationModal">
+            <a *ngIf="session.isAuthenticated" class="edit" (click)="onPhotoUpdate(photo)"><i class="now-ui-icons design-2_ruler-pencil"></i></a>
+
+            <a *ngIf="session.isAuthenticated" class="delete" data-toggle="modal" (click)="onPhotoDelete(photo)" data-target="#confirmationModal">
               <i class="now-ui-icons ui-1_simple-remove"></i>
             </a>
 
-            <!--<a  (click)="onPhotoDelete(photo)"><i class="now-ui-icons ui-1_simple-remove"></i></a>-->
           </div>
 
           <div class="overlay" *ngIf="changeCover" (click)="photoSelected.next(photo)">
@@ -54,13 +55,13 @@
 
         </div>
       </div>
-
+      </ng-template>
 
     </div>
 
   </div>
 
 </div>
-<app-photo-edit *ngIf="selectedPhoto != null" [photo]="selectedPhoto" (status)="onStatusMessage($event)"></app-photo-edit>
-<app-photo-add [galleryId]="gallery.id" (status)="onStatusMessage($event)"></app-photo-add>
+<app-photo-edit *ngIf="selectedPhoto != null && session.isAuthenticated" [photo]="selectedPhoto" (status)="onPhotoEdit($event)"></app-photo-edit>
+<app-photo-add *ngIf="session.isAuthenticated" [galleryId]="gallery.id" (status)="onPhotoAdd($event)"></app-photo-add>
 <app-confirmation-dialog [message]="confirmationMessage" (confirmation)="onDialogConfirmation($event)"></app-confirmation-dialog>

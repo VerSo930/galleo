@@ -8,6 +8,7 @@ import {AuthService} from '../../auth/auth.service';
 import {PaginationModel} from '../../shared/model/pagination.model';
 import {PhotoModel} from '../../shared/model/photo.model';
 import {isNullOrUndefined} from 'util';
+import {SessionModel} from '../../shared/model/session.model';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class GalleryDetailComponent implements OnInit, OnDestroy, AfterViewInit 
 
   @ViewChild('galleryHeader')
   galleryHeader: ElementRef;
-
+  session: SessionModel;
   changeCover = false;
 
   private galleryListSubscription: Subscription;
@@ -51,10 +52,11 @@ export class GalleryDetailComponent implements OnInit, OnDestroy, AfterViewInit 
               private authService: AuthService) {
   }
 
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewInit(): void {}
 
   ngOnInit() {
+
+    this.session = this.authService.cachedSession;
 
     // reset pagination for storage service
     this.storageService.pagination = new PaginationModel(this.gallery.photosCount, 12, 1);
@@ -87,9 +89,7 @@ export class GalleryDetailComponent implements OnInit, OnDestroy, AfterViewInit 
 
   onScroll() {
 
-    if (this.storageService.pagination.nextPage()) {
-      this.storageService.getGalleryPhotos(this.gallery.id);
-    }
+
   }
 
   onCoverSelected(photo: PhotoModel) {

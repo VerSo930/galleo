@@ -7,7 +7,7 @@ import {GalleryDetailComponent} from './gallery-detail/gallery-detail.component'
 import {ProfileDetailComponent} from './profile-detail/profile-detail.component';
 
 const profileRoutes: Routes = [
-  {path: '', component: ProfileComponent, canActivate:  [AuthGuard], children: [
+  {path: '', component: ProfileComponent, children: [
     { path: 'detail', component: ProfileDetailComponent },
     { path: 'gallery-detail/:galleryId', component: GalleryDetailComponent },
    // { path: 'gallery-list', component: GalleryListComponent },

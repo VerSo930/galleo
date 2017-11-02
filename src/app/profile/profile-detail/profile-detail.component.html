@@ -5,7 +5,7 @@
        style="background-image: url('../assets/img/bg5.jpg'); transform: translate3d(0px, 0px, 0px);">
   </div>
   <!--header container-->
-  <div class="container">
+  <div *ngIf="user != null" class="container">
     <div class="content-center">
       <div class="photo-container">
         <img [src]="(user.avatar == null)? '../assets/img/default-avatar.png': '../assets/img/blurred-image-1.jpg'"

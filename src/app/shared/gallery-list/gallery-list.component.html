@@ -5,7 +5,9 @@
 
       <div class="col-md-6" style="padding: 0">
         <div class="gallery">
-          <div class="cover" style="background-image: url('../assets/img/bg5.jpg')">
+          <div class="cover" [style.backgroundImage]="(gallery.coverImage != null)?
+          +'url(http://vuta-alexandru.com:8080/Galleo/photo/resource/'
+      + gallery.coverImage.userId + '/' + gallery.coverImage.galleryId + '/' + gallery.coverImage.id + '/medium/' + gallery.coverImage.url + ')': 'url(../assets/no-gallery.png)'">
             <label>
               <i class="now-ui-icons shopping_tag-content" style="font-size: 20px; padding: 7px"></i>
               {{gallery.name}}
@@ -14,6 +16,12 @@
                     type="button">
               <i class="now-ui-icons media-1_album"></i> View Gallery
             </button>
+
+            <a *ngIf="session.isAuthenticated" class="edit" (click)="onGalleryUpdate(gallery)"><i class="now-ui-icons design-2_ruler-pencil"></i></a>
+
+            <a *ngIf="session.isAuthenticated" class="delete" data-toggle="modal" (click)="onGalleryDelete(gallery)" data-target="#confirmationModal">
+              <i class="now-ui-icons ui-1_simple-remove"></i>
+            </a>
 
           </div>
           <div class="info">
