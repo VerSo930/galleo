@@ -36,7 +36,7 @@ export class AuthService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
 
-     this.http.post<UserModel>(this.apiUrl, user, {observe: 'response', headers: headers}).subscribe(
+     return this.http.post<UserModel>(this.apiUrl, user, {observe: 'response', headers: headers}).subscribe(
       (response) => {
         console.dir(response);
         this.cachedSession.user = response.body;
