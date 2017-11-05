@@ -6,7 +6,7 @@ import {CookieService} from 'ngx-cookie';
 import 'rxjs/add/observable/of';
 import {SessionModel} from '../shared/model/session.model';
 
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {AppSettings} from '../app.settings';
 import {Md5} from 'ts-md5/dist/md5';
 import {Router} from '@angular/router';
@@ -33,22 +33,19 @@ export class AuthService {
     user.userName = username;
     user.password = Md5.hashStr(password).toString();
 
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-
-     this.http.post<UserModel>(this.apiUrl, user, {observe: 'response', headers: headers}).subscribe(
+      return this.http.post<UserModel>(this.apiUrl, user, {observe: 'response'}).map(
       (response) => {
-        console.dir(response);
+        console.dir('okkk');
         this.cachedSession.user = response.body;
         this.cachedSession.token = response.headers.get('Authorization');
         this.cachedSession.isAuthenticated = true;
         this.session.next(this.cachedSession);
         this.cookieSrv.put('system-g-unx-data', btoa(user.userName + '||' + user.password));
-        return response.body;
+        return response;
       },
-      (error) => {
-        console.log(error);
-        this.session.next(null);
+      err => {
+        console.log('failed');
+        //return null;
       }
     );
   }

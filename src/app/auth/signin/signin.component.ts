@@ -38,19 +38,19 @@ export class SigninComponent implements OnInit, OnDestroy {
 
     this.createForm();
 
-    this.subscription = this.authService.session.subscribe((session: SessionModel) => {
-      this.loading = false;
-      console.dir(session);
-        if (!session.isAuthenticated) {
-          this.showError(session.message);
-        } else {
-          this.router.navigate(['./', 'view-profile', session.user.id, 'detail']).then(
-            value => {
-              console.log('router to profile:' + value);
-            }
-          );
-        }
-    } );
+    /* this.subscription = this.authService.session.subscribe((session: SessionModel) => {
+       this.loading = false;
+       console.dir(session);
+         if (!session.isAuthenticated) {
+           this.showError(session.message);
+         } else {
+           this.router.navigate(['./', 'view-profile', session.user.id, 'detail']).then(
+             value => {
+               console.log('router to profile:' + value);
+             }
+           );
+         }
+     } );*/
 
   }
 
@@ -59,14 +59,34 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-      this.loading = true;
-     this.authService.login(this.siForm.get('userName').value, this.siForm.get('password').value); }
+    this.loading = true;
+    this.authService.login(this.siForm.get('userName').value, this.siForm.get('password').value)
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          console.dir(response);
+          if (response == null) {
+            this.showError('An error occured. Please try again later (NETWORK-ERR)');
+          } else if (response.status === 401) {
+            this.showError('Wrong username and password! Try again with correct credentials!');
+          } else {
+            this.router.navigate(['./', 'view-profile', response.body.id, 'detail']);
+          }
+
+        },
+        err => {
+          this.loading = false;
+          this.showError('Wrong username and password! Try again with correct credentials!');
+          console.dir('error finally');
+        }
+      );
+  }
 
 
   createForm() {
     this.siForm = new FormGroup({
       'userName': new FormControl('', [Validators.required]),
-      'password':  new FormControl('', Validators.required)
+      'password': new FormControl('', Validators.required)
     });
   }
 
