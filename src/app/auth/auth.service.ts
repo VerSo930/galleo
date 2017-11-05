@@ -6,7 +6,7 @@ import {CookieService} from 'ngx-cookie';
 import 'rxjs/add/observable/of';
 import {SessionModel} from '../shared/model/session.model';
 
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AppSettings} from '../app.settings';
 import {Md5} from 'ts-md5/dist/md5';
 import {Router} from '@angular/router';

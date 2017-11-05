@@ -201,7 +201,7 @@ export class DataStorageService {
   }
 
   updatePhoto(originalPhoto: PhotoModel, updatedPhoto: PhotoModel): Observable<boolean> {
-    return this.httpClient.put(AppSettings.API_ENDPOINT + 'photo', updatedPhoto,
+    return this.httpClient.put(AppSettings.API_ENDPOINT + 'photo/' + originalPhoto.galleryId, updatedPhoto,
       {observe: 'response'}).map(
       (response) => {
         const index = this.galleryMap.get(+originalPhoto.galleryId).photos.findIndex(d => +d.id === +originalPhoto.id);
