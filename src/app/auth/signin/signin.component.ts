@@ -1,12 +1,9 @@
-import {Component, Inject, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
-import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import {FormControl, FormGroup,  Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {Subscription} from 'rxjs/Subscription';
-import {UserModel} from '../../shared/model/user.model';
-import {Subject} from 'rxjs/Subject';
 import {Router} from '@angular/router';
-import {SessionModel} from '../../shared/model/session.model';
 
 @Component({
   selector: 'app-signin',
@@ -55,7 +52,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 
   onSubmit() {

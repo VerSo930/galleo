@@ -12,6 +12,7 @@ import {GalleryAddComponent} from './gallery-add/gallery-add.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import {EditPhotoComponent} from './photo-edit/photo-edit.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { GalleryEditComponent } from './gallery-edit/gallery-edit.component';
 
 
 
@@ -29,7 +30,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     PhotoAddComponent,
     GalleryAddComponent,
     ConfirmationDialogComponent,
-    EditPhotoComponent
+    EditPhotoComponent,
+    GalleryEditComponent
      ],
   exports: [
     PhotoListComponent,
