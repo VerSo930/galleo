@@ -90,11 +90,11 @@ export class PhotoListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.session = this.authService.cachedSession;
+    this.pagination.totalCount = this.gallery.photosCount;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!isNullOrUndefined(changes.changeCover)) {
-
       this.changeCover = changes.changeCover.currentValue;
       console.log('change cover click: ' + this.changeCover);
     }
@@ -104,9 +104,6 @@ export class PhotoListComponent implements OnInit, OnChanges {
       console.dir(changes.gallery.currentValue);
       console.log('change gallery ' + changes.gallery);
       this.gallery = changes.gallery.currentValue;
-      this.gallery.filterPrivatePhotos(this.session);
-
-
     }
   }
 
@@ -139,7 +136,15 @@ export class PhotoListComponent implements OnInit, OnChanges {
 
   onScrollMethod() {
     if (this.pagination.nextPage()) {
-      this.storageService.getGalleryPhotos(this.gallery.id, this.pagination);
+      if (isNullOrUndefined(this.gallery.id)) {
+        this.storageService.getAllPhotos(this.pagination).subscribe(
+          response => {
+            this.gallery.photos.push(...response.body);
+          }
+        );
+      } else {
+        this.storageService.getGalleryPhotos(this.gallery.id, this.pagination);
+      }
     }
   }
 

@@ -1,8 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataStorageService} from '../../shared/storage/data-storage.service';
-import {PhotoModel} from '../../shared/model/photo.model';
 import {Subscription} from 'rxjs/Subscription';
 import {GalleryModel} from '../../shared/model/gallery.model';
+import {PaginationModel} from '../../shared/model/pagination.model';
+import {isNullOrUndefined} from 'util';
+
 
 @Component({
   selector: 'app-all-photos',
@@ -12,17 +14,18 @@ import {GalleryModel} from '../../shared/model/gallery.model';
 export class AllPhotosComponent implements OnInit, OnDestroy {
 
   gallery = new GalleryModel();
-  subscription: Subscription;
   constructor(private storageService: DataStorageService) { }
 
   ngOnInit() {
 
-    this.subscription = this.storageService.getAllPhotos<PhotoModel[]>(10, 1).subscribe(
+  this.storageService.getAllPhotos(new PaginationModel(0, 12, 1)).subscribe(
       response => {
-        console.dir(response);
-        if (response.ok) {
+        if (response.ok && response.body.length !== 0) {
           this.gallery = new GalleryModel();
-          this.gallery.photos = response.data;
+          this.gallery.photosCount = +response.headers.get('X-Pagination-Count');
+          this.gallery.photos = response.body;
+          console.log('get all photos subscribe');
+          console.dir(this.gallery);
         }
       }
     );
@@ -30,7 +33,6 @@ export class AllPhotosComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   onScroll($event) {

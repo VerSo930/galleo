@@ -3,10 +3,9 @@ import {GalleryModel} from '../model/gallery.model';
 import {PhotoModel} from '../model/photo.model';
 import {Subject} from 'rxjs/Subject';
 
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {AppSettings} from '../../app.settings';
 import {Observable} from 'rxjs/Observable';
-import {HttpResponseModel} from '../model/http-response.model';
 import {PaginationModel} from '../model/pagination.model';
 import {AuthService} from '../../auth/auth.service';
 import {isNullOrUndefined} from 'util';
@@ -45,33 +44,24 @@ export class DataStorageService {
     );
   }
 
-  getAllPhotos<T>(limit: number, page: number): Observable<HttpResponseModel<T>> {
+  getAllPhotos(pagination: PaginationModel): Observable<HttpResponse<PhotoModel[]>> {
 
     console.log('Get All photos called');
     const headers = new HttpHeaders()
-      .set('X-Pagination-Page', '' + page)
-      .set('X-Pagination-Limit', '' + limit);
+      .set('X-Pagination-Page', '' + pagination.currentPage)
+      .set('X-Pagination-Limit', '' + pagination.limit);
 
-    return this.httpClient.get<T>(AppSettings.API_ENDPOINT + 'photo',
+    return this.httpClient.get<PhotoModel[]>(AppSettings.API_ENDPOINT + 'photo',
       {observe: 'response', headers: headers}).map(
       (response) => {
-        this.pagination.totalCount = +response.headers.get('X-Pagination-Count');
-        this.pagination.currentPage = +response.headers.get('X-Pagination-Page');
-
-        return new HttpResponseModel(response.body,
-          +response.headers.get('X-Pagination-Page'),
-          +response.headers.get('X-Pagination-Count'),
-          response.ok,
-          'Gallery data fetched succesfully');
+        console.dir(response);
+        pagination.totalCount = +response.headers.get('X-Pagination-Count');
+        pagination.currentPage = +response.headers.get('X-Pagination-Page');
+        return response;
       },
       (error) => {
         console.log(error);
-        return new HttpResponseModel<T>(null,
-          null,
-          null,
-          false,
-          error.message);
-
+        return null;
       }
     );
   }
