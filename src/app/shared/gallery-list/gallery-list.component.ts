@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GalleryModel} from '../model/gallery.model';
 import {Router} from '@angular/router';
 import {SessionModel} from '../model/session.model';
@@ -13,6 +13,8 @@ export class GalleryListComponent implements OnInit {
 
   @Input()
   galleryList: GalleryModel[];
+
+  selectedGallery: GalleryModel;
 
   @Output()
   onScroll: EventEmitter<null> = new EventEmitter();
@@ -35,8 +37,11 @@ export class GalleryListComponent implements OnInit {
     this.router.navigate(['./', 'view-profile', gallery.userId, 'gallery-detail', gallery.id]);
   }
 
-  onGalleryUpdate() {
-    // TODO: Modal lunch for update gallery
+  onUpdateSuccess($event) {
+   console.log($event);
+  }
+  onGallerySelected(gallery: GalleryModel) {
+    this.selectedGallery = gallery;
   }
 
   onGalleryDelete() {

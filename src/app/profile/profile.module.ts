@@ -11,7 +11,6 @@ import { ProfileDetailComponent } from './profile-detail/profile-detail.componen
 import {TruncateModule} from 'ng2-truncate';
 import {PhotoListComponent} from '../shared/photo-list/photo-list.component';
 import {FooterComponent} from '../core/footer/footer.component';
-import { EditPhotoComponent } from '../shared/photo-edit/photo-edit.component';
 
 @NgModule({
   imports: [

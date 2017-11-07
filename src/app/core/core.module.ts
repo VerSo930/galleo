@@ -10,7 +10,6 @@ import {
   Optional, SkipSelf
 } from '@angular/core';
 import {AuthService} from '../auth/auth.service';
-import {AuthGuard} from '../auth/auth-guard.service';
 import {FooterComponent} from './footer/footer.component';
 import {DataStorageService} from '../shared/storage/data-storage.service';
 import {ProgressInterceptor} from '../shared/interceptor/progress.interceptor';
@@ -30,7 +29,6 @@ export const interceptor: ProgressInterceptor = new ProgressInterceptor();
     HeaderComponent,
     FooterComponent,
     AdminComponent
-
   ],
   declarations: [
     HeaderComponent,

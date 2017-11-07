@@ -21,6 +21,7 @@ export class AllPhotosComponent implements OnInit, OnDestroy {
       response => {
         console.dir(response);
         if (response.ok) {
+          this.gallery = new GalleryModel();
           this.gallery.photos = response.data;
         }
       }

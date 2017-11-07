@@ -92,18 +92,21 @@ export class PhotoListComponent implements OnInit, OnChanges {
     this.session = this.authService.cachedSession;
   }
 
-  onImageLoad() {
-
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (!isNullOrUndefined(changes.changeCover)) {
+
       this.changeCover = changes.changeCover.currentValue;
       console.log('change cover click: ' + this.changeCover);
     }
 
-    if (changes.gallery) {
-      this.pagination.totalCount = this.gallery.photosCount;
+    if (changes.gallery && changes.gallery.currentValue != null && changes.gallery.currentValue.photos != null) {
+      this.pagination.totalCount = changes.gallery.currentValue.photosCount;
+      console.dir(changes.gallery.currentValue);
+      console.log('change gallery ' + changes.gallery);
+      this.gallery = changes.gallery.currentValue;
+      this.gallery.filterPrivatePhotos(this.session);
+
+
     }
   }
 

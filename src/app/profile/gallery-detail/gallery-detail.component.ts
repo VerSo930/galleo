@@ -36,15 +36,13 @@ import {SessionModel} from '../../shared/model/session.model';
 
 export class GalleryDetailComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @ViewChild('galleryHeader')
+  galleryHeader: ElementRef;
 
   notification = {type: null, title: null, message: null, visible: false};
   gallery = new GalleryModel();
-
-  @ViewChild('galleryHeader')
-  galleryHeader: ElementRef;
   session: SessionModel;
   changeCover = false;
-
   private galleryListSubscription: Subscription;
 
   constructor(private storageService: DataStorageService,

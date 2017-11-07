@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {AuthService} from '../../auth/auth.service';
 import {PaginationModel} from '../../shared/model/pagination.model';
 import {isNullOrUndefined} from 'util';
+import {GalleryModel} from '../../shared/model/gallery.model';
 
 @Component({
   selector: 'app-profile-detail',
@@ -17,8 +18,8 @@ export class ProfileDetailComponent implements OnInit {
   user = new UserModel();
   galleryList = [];
   gallerySub: Subscription;
-  sessionSub: Subscription;
   pagination: PaginationModel;
+  selectedGallery: GalleryModel;
 
   notification = {
     type: null,
@@ -35,6 +36,15 @@ export class ProfileDetailComponent implements OnInit {
 
   ngOnInit() {
 
+    this.gallerySub = this.storageService.galleryListChanged.subscribe(
+      galleryMap => {
+        this.galleryList = Array.from(galleryMap.values()).filter(gallery => gallery.userId === this.user.id);
+        console.dir(this.galleryList);
+      },
+      error => {
+      }
+    );
+
     // reset pagination for storage service
     this.pagination = new PaginationModel(0, 12, 1);
 
@@ -44,33 +54,12 @@ export class ProfileDetailComponent implements OnInit {
         (user) => {
           if (!isNullOrUndefined(user)) {
             this.user = user;
+            this.storageService.getGalleryByUserId(this.user.id, 1, 15);
           }
         }
       );
       console.log('userID: ' + this.user.id);
     });
-
-
-    /* this.sessionSub = this.authService.session.subscribe(
-       (userSession) => {
-         this.user = userSession.user;
-       }
-     );
-
-     this.user = this.authService.getSession().user;*/
-
-    this.gallerySub = this.storageService.galleryListChanged.subscribe(
-      galleryMap => {
-        this.galleryList = Array.from(galleryMap.values());
-      },
-      error => {
-      }
-    );
-
-    this.storageService.getGalleryByUserId(this.user.id, 1, 15);
-
-    // this.elem.nativeElement.querySelector('#test').src = this.src;
-
   }
 
   onViewDetails(id: number) {
@@ -102,6 +91,12 @@ export class ProfileDetailComponent implements OnInit {
   }
 
   onScroll() {
+
+  }
+  onEditClick() {
+
+  }
+  onEditSuccess($event) {
 
   }
 }

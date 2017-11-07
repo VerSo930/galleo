@@ -1,3 +1,5 @@
+import {SessionModel} from './session.model';
+
 export class PhotoModel {
 
   id: number;
@@ -13,5 +15,9 @@ export class PhotoModel {
 
 
   constructor() {
+  }
+
+  isOwner(session: SessionModel): boolean {
+    return session.isAuthenticated && session.user.id === this.userId;
   }
 }

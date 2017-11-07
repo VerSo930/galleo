@@ -11,10 +11,6 @@ import { PhotoAddComponent } from './photo-add/photo-add.component';
 import {GalleryAddComponent} from './gallery-add/gallery-add.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import {EditPhotoComponent} from './photo-edit/photo-edit.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { GalleryEditComponent } from './gallery-edit/gallery-edit.component';
-
-
 
 @NgModule({
   imports: [
@@ -24,15 +20,16 @@ import { GalleryEditComponent } from './gallery-edit/gallery-edit.component';
     InfiniteScrollModule,
     TruncateModule
   ],
+
   declarations: [
     PhotoListComponent,
     GalleryListComponent,
     PhotoAddComponent,
     GalleryAddComponent,
     ConfirmationDialogComponent,
-    EditPhotoComponent,
-    GalleryEditComponent
-     ],
+    EditPhotoComponent
+  ],
+
   exports: [
     PhotoListComponent,
     GalleryListComponent,
@@ -41,6 +38,7 @@ import { GalleryEditComponent } from './gallery-edit/gallery-edit.component';
     GalleryAddComponent,
     ConfirmationDialogComponent,
     EditPhotoComponent,
+
   ],
   providers: [
 
