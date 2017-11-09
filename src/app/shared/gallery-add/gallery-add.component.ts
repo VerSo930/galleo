@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GalleryModel} from '../model/gallery.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../auth/auth.service';
@@ -13,6 +13,9 @@ export class GalleryAddComponent implements OnInit {
 
   @Output()
   status: EventEmitter<{ ok: boolean, message: string }> = new EventEmitter<{ ok: boolean, message: string }>();
+
+  @Input()
+    edit
 
   form: FormGroup;
 

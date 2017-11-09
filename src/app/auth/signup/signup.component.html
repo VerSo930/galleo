@@ -21,64 +21,88 @@
           </div>
           <div class="card-body">
             <div class="input-group form-group-no-border">
-                                        <span class="input-group-addon" [ngClass]="{'invalid': name.invalid && name.touched}">
+                                        <span class="input-group-addon"
+                                              [ngClass]="{'invalid': name.invalid && name.touched}">
                                            <i class="now-ui-icons business_badge"></i>
 
                                         </span>
               <input type="text" class="form-control" placeholder="First Name..."
                      [ngClass]="{'invalid': name.invalid && name.touched}"
-              formControlName="name">
+                     formControlName="name">
+
             </div>
+            <p class="text-danger" *ngIf="name.invalid && name.touched">first name is invalid, min 2 characters</p>
             <div class="input-group form-group-no-border">
-                                        <span class="input-group-addon" [ngClass]="{'invalid': lastName.invalid && lastName.touched}">
+                                        <span class="input-group-addon"
+                                              [ngClass]="{'invalid': lastName.invalid && lastName.touched}">
                                             <i class="now-ui-icons business_badge"></i>
                                         </span>
               <input type="text" placeholder="Last Name..." class="form-control"
                      [ngClass]="{'invalid': lastName.invalid && lastName.touched}"
-              formControlName="lastName">
+                     formControlName="lastName">
             </div>
+            <p class="text-danger" *ngIf="lastName.invalid && lastName.touched">last name is invalid, min 2
+              characters</p>
 
             <div class="input-group form-group-no-border">
-                                        <span class="input-group-addon" [ngClass]="{'invalid': userName.invalid && userName.touched}">
+                                        <span class="input-group-addon"
+                                              [ngClass]="{'invalid': userName.invalid && userName.touched}">
                                               <i class="now-ui-icons users_circle-08"></i>
                                         </span>
               <input type="text" placeholder="User Name..." class="form-control"
                      [ngClass]="{'invalid': userName.invalid && userName.touched}"
-              formControlName="userName">
+                     formControlName="userName">
             </div>
+            <p class="text-danger" *ngIf="userName.invalid && userName.touched">user name is invalid, min 2
+              characters</p>
 
             <div class="input-group form-group-no-border">
-                                        <span class="input-group-addon" [ngClass]="{'invalid': email.invalid && email.touched}">
+                                        <span class="input-group-addon"
+                                              [ngClass]="{'invalid': email.invalid && email.touched}">
                                             <i class="now-ui-icons ui-1_email-85"></i>
                                         </span>
               <input type="text" placeholder="Email.." class="form-control"
                      [ngClass]="{'invalid': email.invalid && email.touched}"
-              formControlName="email">
+                     formControlName="email">
             </div>
+            <p class="text-danger" *ngIf="email.invalid && email.touched">email address is invalid</p>
+
             <div class="input-group form-group-no-border">
-                                        <span class="input-group-addon" [ngClass]="{'invalid': password.invalid && password.touched}">
+                                        <span class="input-group-addon"
+                                              [ngClass]="{'invalid': password.invalid && password.touched}">
                                             <i class="now-ui-icons ui-1_lock-circle-open"></i>
                                         </span>
               <input type="password" class="form-control" placeholder="Password..." formControlName="password"
                      [ngClass]="{'invalid': password.invalid && password.touched}">
             </div>
+            <app-filed-display-error [displayError]="isFieldValid('password')" errorMsg=" Please provide a password"></app-filed-display-error>
+
+
             <div class="input-group form-group-no-border">
-                                        <span class="input-group-addon" [ngClass]="{'invalid': passwordConfirmation.invalid && passwordConfirmation.touched}">
+                                        <span class="input-group-addon"
+                                              [ngClass]="{'invalid': passwordConfirmation.invalid && passwordConfirmation.touched}">
                                             <i class="now-ui-icons ui-1_lock-circle-open"></i>
                                         </span>
-              <input type="password" class="form-control" placeholder="Password confirmation..." formControlName="passwordConfirmation"
+              <input type="password" class="form-control" placeholder="Password confirmation..."
+                     formControlName="passwordConfirmation"
                      [ngClass]="{'invalid': passwordConfirmation.invalid && passwordConfirmation.touched}">
             </div>
+            <p class="text-danger" *ngIf="password.value != passwordConfirmation.value && passwordConfirmation.touched">
+              confirmation password don't match</p>
+            <div class="checkbox" style="padding-top: 10px">
+              <input id="checkboxSignup" type="checkbox" formControlName="thermsConditions">
+              <label for="checkboxSignup">
+                I agree with all <a href=""> terms & conditions</a>
+              </label>
+            </div>
 
-             <div class="checkbox" style="padding-top: 10px">
-              <input id="checkboxSignup" type="checkbox">
-                  <label for="checkboxSignup">
-                  I agree with all <a href=""> terms & conditions</a>
-                  </label>
-                </div>
+            <p class="text-danger" *ngIf="thermsConditions.value && thermsConditions.touched">
+              confirmation password don't match</p>
           </div>
           <div class="footer text-center">
-            <button href="#pablo" class="btn btn-neutral btn-round btn-lg" (click)="onSubmit()" [disabled]="siForm.invalid">Get Started</button>
+            <button href="#pablo" class="btn btn-neutral btn-round btn-lg" (click)="onSubmit()"
+                    [disabled]="siForm.invalid || password.value === passwordConfirmation.value">Get Started
+            </button>
           </div>
         </form>
       </div>

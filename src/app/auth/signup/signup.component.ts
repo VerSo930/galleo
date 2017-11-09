@@ -22,6 +22,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   email: FormControl;
   password: FormControl;
   passwordConfirmation: FormControl;
+  thermsConditions: FormControl;
 
   authFired = false;
   authSuccess = null;
@@ -78,6 +79,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.email = new FormControl('', [Validators.required, Validators.pattern('[^ @]*@[^ @]*')]);
     this.password = new FormControl('', [Validators.required, Validators.minLength(8)]);
     this.passwordConfirmation = new FormControl('', [Validators.required, Validators.minLength(8)]);
+    this.thermsConditions = new FormControl(false, [Validators.required, Validators.minLength(8)]);
   }
 
   createForm() {
@@ -86,9 +88,15 @@ export class SignupComponent implements OnInit, OnDestroy {
       lastName: this.lastName,
       userName: this.userName,
       email: this.email,
-      password: this.password,
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       passwordConfirmation: this.passwordConfirmation,
+
     });
+
+  }
+
+  isFieldValid(field: string) {
+    return !this.siForm.get(field).valid && this.siForm.get(field).touched;
   }
 
   showError(error: string) {

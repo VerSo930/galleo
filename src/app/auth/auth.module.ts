@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthRoutingModule} from './auth-routing.module';
 import {BrowserModule} from '@angular/platform-browser';
 import {AuthService} from './auth.service';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import {AuthService} from './auth.service';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     AuthRoutingModule
   ],
   exports: [

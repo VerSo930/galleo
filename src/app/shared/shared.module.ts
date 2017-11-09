@@ -11,6 +11,7 @@ import { PhotoAddComponent } from './photo-add/photo-add.component';
 import {GalleryAddComponent} from './gallery-add/gallery-add.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import {EditPhotoComponent} from './photo-edit/photo-edit.component';
+import { FiledDisplayErrorComponent } from './filed-display-error/filed-display-error.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import {EditPhotoComponent} from './photo-edit/photo-edit.component';
     PhotoAddComponent,
     GalleryAddComponent,
     ConfirmationDialogComponent,
-    EditPhotoComponent
+    EditPhotoComponent,
+    FiledDisplayErrorComponent
   ],
 
   exports: [
@@ -38,6 +40,7 @@ import {EditPhotoComponent} from './photo-edit/photo-edit.component';
     GalleryAddComponent,
     ConfirmationDialogComponent,
     EditPhotoComponent,
+    FiledDisplayErrorComponent
 
   ],
   providers: [
