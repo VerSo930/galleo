@@ -8,7 +8,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {DataStorageService} from '../storage/data-storage.service';
 import {ProgressInterceptor} from '../interceptor/progress.interceptor';
 import {AuthService} from '../../auth/auth.service';
-
+declare var loadImage: any;
 @Component({
   selector: 'app-photo-add',
   templateUrl: './photo-add.component.html',
@@ -25,8 +25,12 @@ export class PhotoAddComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('imagePreview')
   imagePreview: ElementRef;
 
+  @ViewChild('test')
+  test: ElementRef;
+
   @ViewChild('imageFile')
   imageFile: ElementRef;
+  tmpImg: any;
 
   addPhotoForm: FormGroup;
   progressSubscription: Subscription;
@@ -109,15 +113,28 @@ export class PhotoAddComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   imageChanged(): void {
-    console.dir(this.imageFile.nativeElement.files);
     if (this.imageFile.nativeElement.files[0].type === 'image/jpeg' ||
       this.imageFile.nativeElement.files[0].type === 'image/png' ||
       this.imageFile.nativeElement.files[0].type === 'image/gif') {
+      loadImage(
+        this.imageFile.nativeElement.files[0],
+        function (img) {
+          this.imagePreview.nativeElement.src = img.toDataURL();
+          console.dir(img);
+        }.bind(this),
+        {orientation: true,
+          maxWidth: 600,
+          maxHeight: 300,
+          minWidth: 100,
+          minHeight: 50,
+          canvas: true}
+      );
 
       // read image data and set it to src
       const myReader: FileReader = new FileReader();
       myReader.onloadend = () => {
-        this.imagePreview.nativeElement.src = myReader.result;
+
+
       };
 
       myReader.readAsDataURL(this.imageFile.nativeElement.files[0]);

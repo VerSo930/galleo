@@ -1,5 +1,5 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs/Subscription';
 import {DOCUMENT} from '@angular/common';
 import {AuthService} from '../auth.service';
@@ -32,7 +32,8 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(DOCUMENT) private document: Document,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -83,13 +84,14 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   createForm() {
-    this.siForm = new FormGroup({
+    this.siForm = this.fb.group({
       name: this.name,
       lastName: this.lastName,
       userName: this.userName,
       email: this.email,
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       passwordConfirmation: this.passwordConfirmation,
+      thermsConditions: this.thermsConditions,
 
     });
 

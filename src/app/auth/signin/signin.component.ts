@@ -52,7 +52,6 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.subscription.unsubscribe();
   }
 
   onSubmit() {
@@ -62,19 +61,21 @@ export class SigninComponent implements OnInit, OnDestroy {
         (response) => {
           this.loading = false;
           console.dir(response);
-          if (response == null) {
-            this.showError('An error occured. Please try again later (NETWORK-ERR)');
-          } else if (response.status === 401) {
-            this.showError('Wrong username and password! Try again with correct credentials!');
-          } else {
+          if (response.status === 200) {
             this.router.navigate(['./', 'view-profile', response.body.id, 'detail']);
           }
 
         },
         err => {
           this.loading = false;
-          this.showError('Wrong username and password! Try again with correct credentials!');
-          console.dir('error finally');
+          if (err === 400) {
+            this.showError('User params are missing. Please contact us!');
+          }
+          if (err.status === 401) {
+            this.showError('Wrong username and password! Try again with correct credentials!');
+          } else if (err === 500) {
+            this.showError('Internal Server error. Try again later');
+          }
         }
       );
   }

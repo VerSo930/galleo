@@ -62,3 +62,7 @@ textarea {
 .progress-container.progress-success .progress-value, .progress-container.progress-success .progress-badge {
   color: white;
 }
+
+.img-preview > canvas {
+  max-width: 100%;
+}

@@ -36,8 +36,8 @@
                   Add photo
                 </label>
               </div>
-              <div class="col-sm-12 text-center"
-                   [ngClass]="[imageFile.files[0] != undefined? 'active': 'inactive']">
+              <div #test class="col-sm-12 text-center img-preview">
+                  <!-- [ngClass]="[imageFile.files[0] != undefined? 'active': 'inactive']">-->
                 <img #imagePreview alt="Raised Image" class="rounded img-raised"
                      (click)="onImageClear()">
               </div>

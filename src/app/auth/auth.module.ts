@@ -11,9 +11,9 @@ import {SharedModule} from '../shared/shared.module';
 @NgModule({
   imports: [
     CommonModule,
-    BrowserModule,
-    FormsModule,
     ReactiveFormsModule,
+    FormsModule,
+    BrowserModule,
     SharedModule,
     AuthRoutingModule
   ],

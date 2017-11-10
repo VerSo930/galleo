@@ -7,7 +7,7 @@
         <form class="form" [formGroup]="siForm">
           <div class="header text-center">
             <h4 class="title title-up">Sign Up</h4>
-            <div class="social-line">
+           <!-- <div class="social-line">
               <a href="#pablo" class="btn btn-neutral btn-facebook btn-icon btn-round">
                 <i class="fa fa-facebook-square"></i>
               </a>
@@ -17,7 +17,7 @@
               <a href="#pablo" class="btn btn-neutral btn-google btn-icon btn-round">
                 <i class="fa fa-google-plus"></i>
               </a>
-            </div>
+            </div>-->
           </div>
           <div class="card-body">
             <div class="input-group form-group-no-border">
@@ -31,7 +31,9 @@
                      formControlName="name">
 
             </div>
-            <p class="text-danger" *ngIf="name.invalid && name.touched">first name is invalid, min 2 characters</p>
+            <app-filed-display-error [errorMsg]="'Last name is invalid, minim 2 caharacters'"
+                                     [displayError]="isFieldValid('name')"></app-filed-display-error>
+
             <div class="input-group form-group-no-border">
                                         <span class="input-group-addon"
                                               [ngClass]="{'invalid': lastName.invalid && lastName.touched}">
@@ -41,8 +43,9 @@
                      [ngClass]="{'invalid': lastName.invalid && lastName.touched}"
                      formControlName="lastName">
             </div>
-            <p class="text-danger" *ngIf="lastName.invalid && lastName.touched">last name is invalid, min 2
-              characters</p>
+            <app-filed-display-error [errorMsg]="'Last name is invalid, minim 2 caharacters'"
+                                     [displayError]="isFieldValid('lastName')"></app-filed-display-error>
+
 
             <div class="input-group form-group-no-border">
                                         <span class="input-group-addon"
@@ -53,8 +56,8 @@
                      [ngClass]="{'invalid': userName.invalid && userName.touched}"
                      formControlName="userName">
             </div>
-            <p class="text-danger" *ngIf="userName.invalid && userName.touched">user name is invalid, min 2
-              characters</p>
+            <app-filed-display-error [errorMsg]="'User name is invalid, minim 2 caharacters'"
+                                     [displayError]="isFieldValid('userName')"></app-filed-display-error>
 
             <div class="input-group form-group-no-border">
                                         <span class="input-group-addon"
@@ -65,8 +68,8 @@
                      [ngClass]="{'invalid': email.invalid && email.touched}"
                      formControlName="email">
             </div>
-            <p class="text-danger" *ngIf="email.invalid && email.touched">email address is invalid</p>
-
+            <app-filed-display-error [errorMsg]="'Email address is invalid'"
+                                     [displayError]="isFieldValid('email')"></app-filed-display-error>
             <div class="input-group form-group-no-border">
                                         <span class="input-group-addon"
                                               [ngClass]="{'invalid': password.invalid && password.touched}">
@@ -75,7 +78,8 @@
               <input type="password" class="form-control" placeholder="Password..." formControlName="password"
                      [ngClass]="{'invalid': password.invalid && password.touched}">
             </div>
-            <app-filed-display-error [displayError]="isFieldValid('password')" errorMsg=" Please provide a password"></app-filed-display-error>
+            <app-filed-display-error [errorMsg]="'Please provide a 8 characters password'"
+                                     [displayError]="isFieldValid('password')"></app-filed-display-error>
 
 
             <div class="input-group form-group-no-border">
@@ -87,8 +91,8 @@
                      formControlName="passwordConfirmation"
                      [ngClass]="{'invalid': passwordConfirmation.invalid && passwordConfirmation.touched}">
             </div>
-            <p class="text-danger" *ngIf="password.value != passwordConfirmation.value && passwordConfirmation.touched">
-              confirmation password don't match</p>
+            <app-filed-display-error [errorMsg]="'Confirmation password don\'t match'"
+                                     [displayError]="isFieldValid('passwordConfirmation')"></app-filed-display-error>
             <div class="checkbox" style="padding-top: 10px">
               <input id="checkboxSignup" type="checkbox" formControlName="thermsConditions">
               <label for="checkboxSignup">
@@ -96,8 +100,8 @@
               </label>
             </div>
 
-            <p class="text-danger" *ngIf="thermsConditions.value && thermsConditions.touched">
-              confirmation password don't match</p>
+            <app-filed-display-error [errorMsg]="'For using this application you need to accept therms of use.'"
+                                     [displayError]="siForm.get('thermsConditions').value != true"></app-filed-display-error>
           </div>
           <div class="footer text-center">
             <button href="#pablo" class="btn btn-neutral btn-round btn-lg" (click)="onSubmit()"

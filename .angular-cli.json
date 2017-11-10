@@ -28,6 +28,7 @@
         "assets/js/core/jquery.3.2.1.min.js",
         "assets/js/core/popper.min.js",
         "assets/js/core/bootstrap.min.js",
+        "assets/js/load-image.all.min.js",
         "assets/js/now-ui-kit.js",
         "../node_modules/lightbox2/dist/js/lightbox.js"
       ],

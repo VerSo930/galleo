@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="200">
   <div class="container">
     <div class="dropdown button-dropdown">
-      <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
+      <a [routerLink]="['/']" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
         <span class="button-bar"></span>
         <span class="button-bar"></span>
         <span class="button-bar"></span>
@@ -9,12 +9,12 @@
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-header">Dropdown header</a>
         <a class="dropdown-item" (click)="t()">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+        <a class="dropdown-item" [routerLink]="['/']">Another action</a>
+        <a class="dropdown-item" [routerLink]="['/']">Something else here</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a>
+        <a class="dropdown-item" [routerLink]="['/']">Separated link</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">One more separated link</a>
+        <a class="dropdown-item"[routerLink]="['/']">One more separated link</a>
       </div>
     </div>
     <div class="navbar-translate">
